@@ -1,39 +1,20 @@
+%ml-008 Exercise1
+%Based off of sample code provided by coursera Machine Learning Course
+%ml-008 taught by Andrew NG of Stanford
+%@author Adam Tetelman 2/10/2015
+
 function [X_norm, mu, sigma] = featureNormalize(X)
-%FEATURENORMALIZE Normalizes the features in X 
-%   FEATURENORMALIZE(X) returns a normalized version of X where
-%   the mean value of each feature is 0 and the standard deviation
-%   is 1. This is often a good preprocessing step to do when
-%   working with learning algorithms.
+[m n] = size(X);
 
-% You need to set these values correctly
-X_norm = X;
-mu = zeros(1, size(X, 2));
-sigma = zeros(1, size(X, 2));
+%Calculate mu and sigma and fill a X sized matrix for easier math 
+one_X = ones(1,m);
+mu = (mean(X)'*one_X)';
+sigma = (std(X)'*one_X)';
 
-% ====================== YOUR CODE HERE ======================
-% Instructions: First, for each feature dimension, compute the mean
-%               of the feature and subtract it from the dataset,
-%               storing the mean value in mu. Next, compute the 
-%               standard deviation of each feature and divide
-%               each feature by it's standard deviation, storing
-%               the standard deviation in sigma. 
-%
-%               Note that X is a matrix where each column is a 
-%               feature and each row is an example. You need 
-%               to perform the normalization separately for 
-%               each feature. 
-%
-% Hint: You might find the 'mean' and 'std' functions useful.
-%       
+X_norm = (X - mu)./sigma;
 
-
-
-
-
-
-
-
-
-% ============================================================
+%Return only 1 row
+mu = mu(1,:);
+sigma = sigma(1,:);
 
 end

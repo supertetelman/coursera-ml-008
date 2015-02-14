@@ -1,3 +1,9 @@
+%ml-008 Exercise1
+%Unaltered sample code provided by coursera Machine Learning Course
+%ml-008 taught by Andrew NG of Stanford
+%2/10/2015
+
+
 function submit(partId, webSubmit)
 %SUBMIT Submit your code and output to the ml-class servers
 %   SUBMIT() will connect to the ml-class server and submit your solution

@@ -1,8 +1,3 @@
-%ml-008 Exercise1
-%Based off of sample code provided by coursera Machine Learning Course
-%ml-008 taught by Andrew NG of Stanford
-%@author Adam Tetelman 2/10/2015
-
 %% Machine Learning Online Class
 %  Exercise 1: Linear regression with multiple variables
 %
@@ -87,7 +82,7 @@ X = [ones(m, 1) X];
 fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
-alpha = 0.065;
+alpha = 0.01;
 num_iters = 400;
 
 % Init Theta and Run Gradient Descent 
@@ -105,12 +100,20 @@ fprintf('Theta computed from gradient descent: \n');
 fprintf(' %f \n', theta);
 fprintf('\n');
 
+% Estimate the price of a 1650 sq-ft, 3 br house
+% ====================== YOUR CODE HERE ======================
+% Recall that the first column of X is all-ones. Thus, it does
+% not need to be normalized.
+
 %Estimate the price of a 3br, 1650sq-ft hoome
-home = [ 1 rowNormalize([1650 3], mu, sigma)]; %normalize the home
-price_gradient = home*theta;
+home = [ 1 rowNormalize([1650 3], mu, sigma)];
+price = home*theta;
+
+
+% ============================================================
 
 fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
-         '(using gradient descent):\n $%f\n'], price_gradient);
+         '(using gradient descent):\n $%f\n'], price);
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
@@ -149,15 +152,11 @@ fprintf('\n');
 
 % Estimate the price of a 1650 sq-ft, 3 br house
 % ====================== YOUR CODE HERE ======================
-%Estimate the price of a 3br, 1650sq-ft hoome
-home = [ 1 1650 3]; %normalize the home
-price_norm = home*theta; % You should change this
+price = 0; % You should change this
+
+
+% ============================================================
 
 fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
-         '(using normal equations):\n $%f\n'], price_norm);
+         '(using normal equations):\n $%f\n'], price);
 
-     
-     fprintf(['Predicted price of a 1650 sq-ft, 3 br house\n' ...
-         '(using normal equations):\n $%f\n' ...
-         '(using gradient descent):\n $%f\n' ...
-         '(using alpha):\n $%f\n'], price_norm, price_gradient,alpha);

@@ -1,3 +1,8 @@
+%ml-008 Exercise1
+%Unaltered sample code provided by coursera Machine Learning Course
+%ml-008 taught by Andrew NG of Stanford
+%2/10/2015
+
 %% Machine Learning Online Class - Exercise 1: Linear Regression
 
 %  Instructions

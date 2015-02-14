@@ -1,22 +1,21 @@
+%ml-008 Exercise1
+%Based off of sample code provided by coursera Machine Learning Course
+%ml-008 taught by Andrew NG of Stanford
+%@author Adam Tetelman 2/10/2015
+
 function J = computeCost(X, y, theta)
-%COMPUTECOST Compute cost for linear regression
-%   J = COMPUTECOST(X, y, theta) computes the cost of using theta as the
-%   parameter for linear regression to fit the data points in X and y
 
-% Initialize some useful values
-m = length(y); % number of training examples
+m = length(y) ; % number of training examples
+n = length(theta) ; % number of variables
+J = 0; %set J to 0 initially
 
-% You need to return the following variables correctly 
-J = 0;
-
-% ====================== YOUR CODE HERE ======================
-% Instructions: Compute the cost of a particular choice of theta
-%               You should set J to the cost.
-
-
-
-
-
-% =========================================================================
+%Solve for J by iterating/summing through all training data
+for i=1:m
+    %solve using math & function substitution
+    %J = J +((theta(1,1)*X(i,1)+theta(2,1)*X(i,2)-y(i))^2)/(2*m); 
+    
+    %Solve using matrix algebra
+    J = J + ((theta'*X(i,:)'-y(i))^2)/(2*m);
+end
 
 end
