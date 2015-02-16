@@ -87,7 +87,7 @@ pause;
 initial_theta = zeros(size(X, 2), 1);
 hold on;
 
-for i=1:50
+for i=0:50
 % Set regularization parameter lambda to 1 (you should vary this)
 lambda = i;
 
