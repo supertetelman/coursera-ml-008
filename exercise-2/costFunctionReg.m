@@ -1,27 +1,28 @@
+%ml-008 Exercise2
+%Based off of sample code provided by coursera Machine Learning Course
+%ml-008 taught by Andrew NG of Stanford
+%@author Adam Tetelman 2/15/2015
 function [J, grad] = costFunctionReg(theta, X, y, lambda)
-%COSTFUNCTIONREG Compute cost and gradient for logistic regression with regularization
-%   J = COSTFUNCTIONREG(theta, X, y, lambda) computes the cost of using
-%   theta as the parameter for regularized logistic regression and the
-%   gradient of the cost w.r.t. to the parameters. 
-
 % Initialize some useful values
-m = length(y); % number of training examples
-
-% You need to return the following variables correctly 
 J = 0;
 grad = zeros(size(theta));
+m = length(y); % number of training examples
+cost = sigmoid(X*theta); %cost matrix
+n = length(theta);
 
-% ====================== YOUR CODE HERE ======================
-% Instructions: Compute the cost of a particular choice of theta.
-%               You should set J to the cost.
-%               Compute the partial derivatives and set grad to the partial
-%               derivatives of the cost w.r.t. each parameter in theta
+for i=1:m    
+    J = J + (-y(i)*log(cost(i,:))) - ((1-y(i))*log(1-cost(i,:)));
+    grad(:) = grad(:) + (cost(i) - y(i)) * X(i,:)';%use matrix math
+end
+
+%Regularize the cost and gradient (note we do not regularize theta(0)
+J = J + sum(lambda*(theta(2:n).^2)/2);
+grad(2:n) = grad(2:n) + lambda*theta(2:n);
 
 
-
-
-
-
-% =============================================================
+%Finish up by dividing by number of samples
+J = J/m;
+grad = grad/m;
 
 end
+

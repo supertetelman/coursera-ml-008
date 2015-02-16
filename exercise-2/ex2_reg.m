@@ -85,9 +85,11 @@ pause;
 
 % Initialize fitting parameters
 initial_theta = zeros(size(X, 2), 1);
+hold on;
 
+for i=1:50
 % Set regularization parameter lambda to 1 (you should vary this)
-lambda = 1;
+lambda = i;
 
 % Set Options
 options = optimset('GradObj', 'on', 'MaxIter', 400);
@@ -98,7 +100,6 @@ options = optimset('GradObj', 'on', 'MaxIter', 400);
 
 % Plot Boundary
 plotDecisionBoundary(theta, X, y);
-hold on;
 title(sprintf('lambda = %g', lambda))
 
 % Labels and Legend
@@ -106,6 +107,7 @@ xlabel('Microchip Test 1')
 ylabel('Microchip Test 2')
 
 legend('y = 1', 'y = 0', 'Decision boundary')
+end
 hold off;
 
 % Compute accuracy on our training set

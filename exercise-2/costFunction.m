@@ -1,32 +1,29 @@
+%ml-008 Exercise2
+%Based off of sample code provided by coursera Machine Learning Course
+%ml-008 taught by Andrew NG of Stanford
+%@author Adam Tetelman 2/15/2015
+
 function [J, grad] = costFunction(theta, X, y)
-%COSTFUNCTION Compute cost and gradient for logistic regression
-%   J = COSTFUNCTION(theta, X, y) computes the cost of using theta as the
-%   parameter for logistic regression and the gradient of the cost
-%   w.r.t. to the parameters.
 
 % Initialize some useful values
-m = length(y); % number of training examples
-
-% You need to return the following variables correctly 
 J = 0;
 grad = zeros(size(theta));
+m = length(y); % number of training examples
+cost = sigmoid(X*theta); %cost matrix
 
-% ====================== YOUR CODE HERE ======================
-% Instructions: Compute the cost of a particular choice of theta.
-%               You should set J to the cost.
-%               Compute the partial derivatives and set grad to the partial
-%               derivatives of the cost w.r.t. each parameter in theta
-%
-% Note: grad should have the same dimensions as theta
-%
+for i=1:m    
+    %Compute most of the cost function
+    J = J + (-y(i)*log(cost(i,:))) - ((1-y(i))*log(1-cost(i,:)));
+    grad(:) = grad(:) + (cost(i) - y(i)) * X(i,:)';%use matrix math
 
+%   %Solve for gradient by iterating through samples
+%   for j=1:length(theta)
+%       grad(j) = grad(j) + (cost(i) - y(i)) * X(i,j)';
+%   %end
+end
 
-
-
-
-
-
-
-% =============================================================
+%Finish up by dividing by number of samples
+J = J/m;
+grad = grad/m;
 
 end

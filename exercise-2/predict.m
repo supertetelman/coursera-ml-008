@@ -1,27 +1,19 @@
+%ml-008 Exercise2
+%Based off of sample code provided by coursera Machine Learning Course
+%ml-008 taught by Andrew NG of Stanford
+%@author Adam Tetelman 2/15/2015
 function p = predict(theta, X)
-%PREDICT Predict whether the label is 0 or 1 using learned logistic 
-%regression parameters theta
-%   p = PREDICT(theta, X) computes the predictions for X using a 
-%   threshold at 0.5 (i.e., if sigmoid(theta'*x) >= 0.5, predict 1)
-
 m = size(X, 1); % Number of training examples
 
 % You need to return the following variables correctly
 p = zeros(m, 1);
 
-% ====================== YOUR CODE HERE ======================
-% Instructions: Complete the following code to make predictions using
-%               your learned logistic regression parameters. 
-%               You should set p to a vector of 0's and 1's
-%
+cost = sigmoid(X*theta);%Calculate cost for all values
 
-
-
-
-
-
-
-% =========================================================================
-
-
+%Set prediction to be 1/0 based on .5 threshold
+for i=1:m
+    predict = -1;
+    if cost(i) < .5; predict = 0; end
+    if cost(i) >= .5; predict = 1; end
+    p(i,1) = predict;
 end

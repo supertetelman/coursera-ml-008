@@ -122,9 +122,8 @@ pause;
 %  and score 85 on exam 2 
 
 prob = sigmoid([1 45 85] * theta);
-theta
 fprintf(['For a student with scores 45 and 85, we predict an admission ' ...
-         'probability of\n %f \n\n'], prob);
+         'probability of\n %f \n\n'], prob, heta);
 
 % Compute accuracy on our training set
 p = predict(theta, X);
