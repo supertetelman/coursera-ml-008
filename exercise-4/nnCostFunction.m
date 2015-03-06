@@ -1,3 +1,8 @@
+%ml-008 Exercise4
+%Based off of sample code provided by coursera Machine Learning Course
+%ml-008 taught by Andrew NG of Stanford
+%@author Adam Tetelman 3/5/2015
+
 function [J grad] = nnCostFunction(nn_params, ...
                                    input_layer_size, ...
                                    hidden_layer_size, ...
@@ -30,62 +35,44 @@ J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
 
-% ====================== YOUR CODE HERE ======================
-% Instructions: You should complete the code by working through the
-%               following parts.
-%
-% Part 1: Feedforward the neural network and return the cost in the
-%         variable J. After implementing Part 1, you can verify that your
-%         cost function computation is correct by verifying the cost
-%         computed in ex4.m
-%
-% Part 2: Implement the backpropagation algorithm to compute the gradients
-%         Theta1_grad and Theta2_grad. You should return the partial derivatives of
-%         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
-%         Theta2_grad, respectively. After implementing Part 2, you can check
-%         that your implementation is correct by running checkNNGradients
-%
-%         Note: The vector y passed into the function is a vector of labels
-%               containing values from 1..K. You need to map this vector into a 
-%               binary vector of 1's and 0's to be used with the neural network
-%               cost function.
-%
-%         Hint: We recommend implementing backpropagation using a for-loop
-%               over the training examples if you are implementing it for the 
-%               first time.
-%
-% Part 3: Implement regularization with the cost function and gradients.
-%
-%         Hint: You can implement this around the code for
-%               backpropagation. That is, you can compute the gradients for
-%               the regularization separately and then add them to Theta1_grad
-%               and Theta2_grad from Part 2.
-%
+%Calculate the Hypthosesis and hidden layer vaules
+a1 = X;
+a1_pad = [ones(length(a1),1) a1];
+a2 = sigmoid(a1_pad*Theta1');
+a2_pad = [ones(length(a2),1) a2];
+H = sigmoid(a2_pad*Theta2');
 
+%Create a matrix indicating actual results
+Y = ones(length(H),num_labels);
+for i=1:num_labels
+    Y(:,i) = y == i;
+end
 
+%Calculate the deltas
+delta_3 = H - Y;
+Z = sigmoidGradient(a1_pad*Theta1');
+delta_2 = delta_3*Theta2 .* [ ones(length(Z),1) Z];
+Theta1_grad =    (a1_pad' * delta_2(:,2:end))';
+Theta2_grad =   (a2_pad' * delta_3)';
 
+%Regularize 
+Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + lambda*Theta1(:,2:end);
+Theta2_grad(:,2:end) = Theta2_grad(:,2:end) + lambda*Theta2(:,2:end);
 
+%Do a computation for each training row and each possible outcome (0-10)
+for i=1:m
+    Y = (y(i,1) == 1:num_labels);
+    J = J + sum(-Y .* log(H(i,:)) - (1-Y) .* log(1-H(i,:)));
+end
 
+%Regularize cost from theta values 
+%Exclude the first column bias value
+J = J + (lambda*(sum(sum(Theta1(:,2:end) .^ 2)) + ...
+    sum(sum(Theta2(:,2:end) .^ 2))))/2;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-% -------------------------------------------------------------
-
-% =========================================================================
+J=J/m;
 
 % Unroll gradients
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
+grad = [Theta1_grad(:) ; Theta2_grad(:)] ./m;
 
 end
