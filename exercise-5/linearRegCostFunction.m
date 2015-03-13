@@ -1,3 +1,8 @@
+%ml-008 Exercise5
+%Based off of sample code provided by coursera Machine Learning Course
+%ml-008 taught by Andrew NG of Stanford
+%@author Adam Tetelman 3/12/2015
+
 function [J, grad] = linearRegCostFunction(X, y, theta, lambda)
 %LINEARREGCOSTFUNCTION Compute cost and gradient for regularized linear 
 %regression with multiple variables
@@ -12,25 +17,14 @@ m = length(y); % number of training examples
 J = 0;
 grad = zeros(size(theta));
 
-% ====================== YOUR CODE HERE ======================
-% Instructions: Compute the cost and gradient of regularized linear 
-%               regression for a particular choice of theta.
-%
-%               You should set J to the cost and grad to the gradient.
-%
+H = X*theta;
 
+J = (sum((H - y) .^2)  + (lambda * sum((theta(2:end,:) .^ 2)))) / ( 2*m );
+grad(1) = (sum((H - y) .* X(:,1))) / m;
+for i=2:length(theta)
+    grad(i) = (sum((H - y) .* X(:,i)) + lambda * sum(theta(i,:)))/m ;
+end
 
-
-
-
-
-
-
-
-
-
-
-% =========================================================================
 
 grad = grad(:);
 
