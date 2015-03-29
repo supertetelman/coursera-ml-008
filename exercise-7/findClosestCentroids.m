@@ -21,7 +21,7 @@ end
 
 %TODO: this seems inefficient
 [tmp idx] = min(distance');
-idx = idx'
+idx = idx';
 
 end
 
