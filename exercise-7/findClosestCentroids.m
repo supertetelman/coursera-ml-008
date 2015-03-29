@@ -1,3 +1,7 @@
+%ml-008 Exercise7
+%Based off of sample code provided by coursera Machine Learning Course
+%ml-008 taught by Andrew NG of Stanford
+%@author Adam Tetelman 3/28/2015
 function idx = findClosestCentroids(X, centroids)
 %FINDCLOSESTCENTROIDS computes the centroid memberships for every example
 %   idx = FINDCLOSESTCENTROIDS (X, centroids) returns the closest centroids
@@ -6,28 +10,18 @@ function idx = findClosestCentroids(X, centroids)
 %
 
 % Set K
-K = size(centroids, 1);
+[K L] = size(centroids);
+distance = zeros(length(X),K);
 
-% You need to return the following variables correctly.
-idx = zeros(size(X,1), 1);
+for i=1:K
+    for j=1:L
+        distance(:,i) = distance(:,i) + (X(:,j) - centroids(i,j)) .^ 2;
+    end
+end
 
-% ====================== YOUR CODE HERE ======================
-% Instructions: Go over every example, find its closest centroid, and store
-%               the index inside idx at the appropriate location.
-%               Concretely, idx(i) should contain the index of the centroid
-%               closest to example i. Hence, it should be a value in the 
-%               range 1..K
-%
-% Note: You can use a for-loop over the examples to compute this.
-%
-
-
-
-
-
-
-
-% =============================================================
+%TODO: this seems inefficient
+[tmp idx] = min(distance');
+idx = idx'
 
 end
 
