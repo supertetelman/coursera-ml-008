@@ -1,3 +1,7 @@
+%ml-008 Exercise7
+%Based off of sample code provided by coursera Machine Learning Course
+%ml-008 taught by Andrew NG of Stanford
+%@author Adam Tetelman 3/28/2015
 function Z = projectData(X, U, K)
 %PROJECTDATA Computes the reduced data representation when projecting only 
 %on to the top k eigenvectors
@@ -9,18 +13,8 @@ function Z = projectData(X, U, K)
 % You need to return the following variables correctly.
 Z = zeros(size(X, 1), K);
 
-% ====================== YOUR CODE HERE ======================
-% Instructions: Compute the projection of the data using only the top K 
-%               eigenvectors in U (first K columns). 
-%               For the i-th example X(i,:), the projection on to the k-th 
-%               eigenvector is given as follows:
-%                    x = X(i, :)';
-%                    projection_k = x' * U(:, k);
-%
-
-
-
-
-% =============================================================
-
+for i=1:K
+   Z(:,i) = X * U(:, i);
+end
+%   Z = X * U;
 end

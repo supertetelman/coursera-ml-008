@@ -166,7 +166,7 @@ title('Original');
 
 % Display compressed image side by side
 subplot(1, 2, 2);
-imagesc(X_recovered)
+imagesc(X_recovered+30)
 title(sprintf('Compressed, with %d colors.', K));
 
 
